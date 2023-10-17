@@ -1,4 +1,9 @@
+import 'package:coffee_app_user/business_logic/bloc/local_order_bloc/order_bloc.dart';
+import 'package:coffee_app_user/business_logic/bloc/remote_order_bloc/remote_order_bloc.dart';
+import 'package:coffee_app_user/data/models/order_model_firebase.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class LocationPhoneNumberDialog extends StatefulWidget {
   @override
@@ -33,6 +38,9 @@ class _LocationPhoneNumberDialogState extends State<LocationPhoneNumberDialog> {
             controller: phoneNumberController,
             focusNode: phoneNumberFocusNode,
             keyboardType: TextInputType.number,
+            inputFormatters: [
+              MaskTextInputFormatter(mask: '##-###-##-##', filter: {"#": RegExp(r'[0-9]')}),
+            ],
             decoration: InputDecoration(labelText: 'Phone Number (##-###-##-##)'),
             onChanged: (value) {
               if (value.length == 12) {
@@ -57,6 +65,10 @@ class _LocationPhoneNumberDialogState extends State<LocationPhoneNumberDialog> {
             // Handle the location and phone number as needed
             print('Location: $location');
             print('Phone Number: $phoneNumber');
+            context.read<RemoteOrderBloc>().add(PlaceOrder(OrderModelFirabase(
+                location: location,
+                phoneNumber: phoneNumber,
+                orderItems: context.read<LocalOrderBloc>().state)));
             Navigator.of(context).pop();
           },
         ),

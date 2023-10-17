@@ -1,10 +1,12 @@
 import 'package:coffee_app_user/business_logic/bloc/local_order_bloc/order_bloc.dart';
+import 'package:coffee_app_user/business_logic/bloc/remote_order_bloc/remote_order_bloc.dart';
 import 'package:coffee_app_user/business_logic/cubit/auth_cubit/auth_cubit.dart';
 import 'package:coffee_app_user/business_logic/cubit/category_cubit/category_cubit.dart';
 import 'package:coffee_app_user/business_logic/cubit/size_cubit/size_cubit.dart';
 import 'package:coffee_app_user/business_logic/cubit/tab_box_cubit/tab_box_cubit.dart';
 import 'package:coffee_app_user/data/models/coffee_model.dart';
 import 'package:coffee_app_user/data/models/order_model.dart';
+import 'package:coffee_app_user/data/service/order_service.dart';
 import 'package:coffee_app_user/presentation/route/routes.dart';
 import 'package:coffee_app_user/presentation/utils/fonts.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
@@ -37,7 +39,8 @@ class MainApp extends StatelessWidget {
         BlocProvider(create: (context) => CategoryCubit()),
         BlocProvider(create: (context) => SizeCubit()),
         BlocProvider(create: (context) => LocalOrderBloc()..add(GetOrders())),
-        BlocProvider(create: (context) => AuthCubit()..checkCurrentUser())
+        BlocProvider(create: (context) => AuthCubit()..checkCurrentUser()),
+        BlocProvider(create: (context) => RemoteOrderBloc(OrderService())),
       ],
       child: MaterialApp(
         theme: FlexThemeData.light(

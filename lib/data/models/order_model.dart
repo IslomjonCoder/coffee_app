@@ -25,4 +25,11 @@ class Order {
       coffee: coffee ?? this.coffee,
     );
   }
+
+  toJson() {
+    return {
+      'quantity': quantity,
+      'coffee': coffee.toJson(),
+    };
+  }
 }

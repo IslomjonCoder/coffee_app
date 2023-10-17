@@ -35,7 +35,7 @@ class Coffee {
     this.size = 'M', // Set 'M' as the default value for 'size'
   });
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'id': id,
       'name': name,
@@ -47,7 +47,7 @@ class Coffee {
     };
   }
 
-  factory Coffee.fromMap(Map<String, dynamic> map) {
+  factory Coffee.fromJson(Map<String, dynamic> map) {
     return Coffee(
       id: map['id'] as String,
       name: map['name'] as String,

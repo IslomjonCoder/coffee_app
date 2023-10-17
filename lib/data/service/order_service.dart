@@ -20,7 +20,7 @@ class OrderService {
           'userId': userId,
           'location': order.location,
           'phoneNumber': order.phoneNumber,
-          'orderItems': order.orderItems.map((item) => item.toMap()).toList(),
+          'orderItems': order.orderItems.map((item) => item.toJson()).toList(),
           'timestamp': FieldValue.serverTimestamp(),
         });
         return Result.success(null);
