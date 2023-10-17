@@ -31,7 +31,8 @@ class OrderService {
   void increaseOrderQuantity(Order order) {
     final Order? currentOrder = box.get(order.coffee.id);
     if (currentOrder != null) {
-      final Order existingOrder = box.get(order.coffee.id)..existingOrder.quantity += 1;
+      final Order existingOrder = box.get(order.coffee.id);
+      existingOrder.quantity += 1;
       box.put(existingOrder.coffee.id, existingOrder);
     }
   }

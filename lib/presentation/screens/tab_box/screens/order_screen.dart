@@ -152,9 +152,9 @@ class OrderScreen extends StatelessWidget {
                                 style: ButtonStyle(
                                   shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10))),
-                                  padding:
-                                      MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 15)),
-                                  backgroundColor: MaterialStatePropertyAll(AppColor.cD17842),
+                                  padding: const MaterialStatePropertyAll(
+                                      EdgeInsets.symmetric(vertical: 15)),
+                                  backgroundColor: const MaterialStatePropertyAll(AppColor.cD17842),
                                 ),
                                 child: Text(
                                   "Buy Now",
@@ -163,7 +163,7 @@ class OrderScreen extends StatelessWidget {
                                 ),
                               ),
                             )
-                          ].divide(SizedBox(height: 16)),
+                          ].divide(const SizedBox(height: 16)),
                         ),
                       )
                     ],
