@@ -6,10 +6,10 @@ part 'order_event.dart';
 
 part 'order_state.dart';
 
-class OrderBloc extends Bloc<OrderEvent, List<Order>> {
+class LocalOrderBloc extends Bloc<OrderEvent, List<Order>> {
   final OrderService _orderService = OrderService();
 
-  OrderBloc() : super([]) {
+  LocalOrderBloc() : super([]) {
     on<AddOrder>((AddOrder event, Emitter emit) {
       _orderService.addOrder(event.order);
       emit(_orderService.getOrders());

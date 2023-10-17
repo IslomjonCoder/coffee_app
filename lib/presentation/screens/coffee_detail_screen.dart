@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:awesome_extensions/awesome_extensions.dart';
-import 'package:coffee_app_user/business_logic/bloc/order_bloc/order_bloc.dart';
+import 'package:coffee_app_user/business_logic/bloc/local_order_bloc/order_bloc.dart';
 import 'package:coffee_app_user/business_logic/cubit/size_cubit/size_cubit.dart';
 import 'package:coffee_app_user/business_logic/cubit/tab_box_cubit/tab_box_cubit.dart';
 import 'package:coffee_app_user/data/models/coffee_model.dart';
@@ -218,7 +218,7 @@ class CoffeeDetailScreen extends StatelessWidget {
       ),
       child: ElevatedButton(
         onPressed: () {
-          context.read<OrderBloc>().add(AddOrder(
+          context.read<LocalOrderBloc>().add(AddOrder(
               Order(coffee: coffee.copyWith(size: size[context.read<SizeCubit>().state]))));
           Navigator.pop(context);
           context.read<TabBoxCubit>().changeTab(1);

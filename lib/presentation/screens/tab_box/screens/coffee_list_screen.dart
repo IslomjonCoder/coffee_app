@@ -1,5 +1,5 @@
 import 'package:awesome_extensions/awesome_extensions.dart';
-import 'package:coffee_app_user/business_logic/bloc/order_bloc/order_bloc.dart';
+import 'package:coffee_app_user/business_logic/bloc/local_order_bloc/order_bloc.dart';
 import 'package:coffee_app_user/business_logic/cubit/category_cubit/category_cubit.dart';
 import 'package:coffee_app_user/data/models/coffee_model.dart';
 import 'package:coffee_app_user/data/models/order_model.dart';
@@ -149,7 +149,7 @@ class CoffeeListScreen extends StatelessWidget {
                   ScaffoldMessenger.of(context)
                       .showSnackBar(const SnackBar(content: Text('Added to cart')));
 
-                  context.read<OrderBloc>().add(AddOrder(Order(coffee: coffee)));
+                  context.read<LocalOrderBloc>().add(AddOrder(Order(coffee: coffee)));
                   await Future.delayed(const Duration(seconds: 1), () {
                     ScaffoldMessenger.of(context).hideCurrentSnackBar();
                   });

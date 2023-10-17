@@ -1,6 +1,7 @@
 import 'package:awesome_extensions/awesome_extensions.dart';
-import 'package:coffee_app_user/business_logic/bloc/order_bloc/order_bloc.dart';
+import 'package:coffee_app_user/business_logic/bloc/local_order_bloc/order_bloc.dart';
 import 'package:coffee_app_user/data/models/order_model.dart';
+import 'package:coffee_app_user/presentation/screens/location_phone_dialog.dart';
 import 'package:coffee_app_user/presentation/utils/colors.dart';
 import 'package:coffee_app_user/presentation/utils/mixin/divider_mixin.dart';
 import 'package:flutter/material.dart';
@@ -18,13 +19,13 @@ class OrderScreen extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                context.read<OrderBloc>().add(ClearOrders());
+                context.read<LocalOrderBloc>().add(ClearOrders());
               },
               icon: const FaIcon(FontAwesomeIcons.trashCan)),
         ],
       ),
       body: SafeArea(
-        child: BlocBuilder<OrderBloc, List<Order>>(
+        child: BlocBuilder<LocalOrderBloc, List<Order>>(
           builder: (context, state) {
             print('state: $state');
             return state.isEmpty
@@ -91,7 +92,7 @@ class OrderScreen extends StatelessWidget {
                                                   IconButton(
                                                     onPressed: () {
                                                       context
-                                                          .read<OrderBloc>()
+                                                          .read<LocalOrderBloc>()
                                                           .add(DecreaseOrder(order));
                                                     },
                                                     icon: const Icon(
@@ -106,7 +107,7 @@ class OrderScreen extends StatelessWidget {
                                                   IconButton(
                                                     onPressed: () {
                                                       context
-                                                          .read<OrderBloc>()
+                                                          .read<LocalOrderBloc>()
                                                           .add(IncreaseOrder(order));
                                                     },
                                                     icon: const Icon(
@@ -148,13 +149,15 @@ class OrderScreen extends StatelessWidget {
                             SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  showLocationPhoneNumberDialog(context);
+                                },
                                 style: ButtonStyle(
                                   shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10))),
-                                  padding:
-                                      MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 15)),
-                                  backgroundColor: MaterialStatePropertyAll(AppColor.cD17842),
+                                  padding: const MaterialStatePropertyAll(
+                                      EdgeInsets.symmetric(vertical: 15)),
+                                  backgroundColor: const MaterialStatePropertyAll(AppColor.cD17842),
                                 ),
                                 child: Text(
                                   "Buy Now",
@@ -163,7 +166,7 @@ class OrderScreen extends StatelessWidget {
                                 ),
                               ),
                             )
-                          ].divide(SizedBox(height: 16)),
+                          ].divide(const SizedBox(height: 16)),
                         ),
                       )
                     ],

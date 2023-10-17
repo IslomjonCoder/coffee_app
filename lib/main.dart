@@ -1,4 +1,5 @@
-import 'package:coffee_app_user/business_logic/bloc/order_bloc/order_bloc.dart';
+import 'package:coffee_app_user/business_logic/bloc/local_order_bloc/order_bloc.dart';
+import 'package:coffee_app_user/business_logic/cubit/auth_cubit/auth_cubit.dart';
 import 'package:coffee_app_user/business_logic/cubit/category_cubit/category_cubit.dart';
 import 'package:coffee_app_user/business_logic/cubit/size_cubit/size_cubit.dart';
 import 'package:coffee_app_user/business_logic/cubit/tab_box_cubit/tab_box_cubit.dart';
@@ -10,10 +11,11 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Firebase.initializeApp();
   await Hive.initFlutter();
   Hive
     ..registerAdapter(CoffeeAdapter()) // Register the CoffeeAdapter.
@@ -34,7 +36,8 @@ class MainApp extends StatelessWidget {
         BlocProvider<TabBoxCubit>(create: (context) => TabBoxCubit()),
         BlocProvider(create: (context) => CategoryCubit()),
         BlocProvider(create: (context) => SizeCubit()),
-        BlocProvider(create: (context) => OrderBloc()..add(GetOrders())),
+        BlocProvider(create: (context) => LocalOrderBloc()..add(GetOrders())),
+        BlocProvider(create: (context) => AuthCubit()..checkCurrentUser())
       ],
       child: MaterialApp(
         theme: FlexThemeData.light(
