@@ -1,11 +1,11 @@
 import 'package:coffee_app_user/data/models/order_model.dart';
 
-class OrderModelFirabase {
+class OrderModelFirebase {
   final String location;
   final String phoneNumber;
   final List<Order> orderItems;
 
-  OrderModelFirabase({
+  OrderModelFirebase({
     required this.location,
     required this.phoneNumber,
     required this.orderItems,
@@ -18,5 +18,14 @@ class OrderModelFirabase {
       'orderItems': orderItems.map((item) => item.toJson()).toList(),
     };
   }
-  factory
+
+  factory OrderModelFirebase.fromJson(Map<String, dynamic> map) {
+    return OrderModelFirebase(
+      location: map['location'] as String,
+      phoneNumber: map['phoneNumber'] as String,
+      orderItems: (map['orderItems'] as List<dynamic>)
+          .map((e) => Order.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+  }
 }

@@ -38,9 +38,9 @@ class MainApp extends StatelessWidget {
         BlocProvider<TabBoxCubit>(create: (context) => TabBoxCubit()),
         BlocProvider(create: (context) => CategoryCubit()),
         BlocProvider(create: (context) => SizeCubit()),
-        BlocProvider(create: (context) => LocalOrderBloc()..add(GetOrders())),
+        // BlocProvider(create: (context) => LocalOrderBloc()..add(GetOrders())),
         BlocProvider(create: (context) => AuthCubit()..checkCurrentUser()),
-        BlocProvider(create: (context) => RemoteOrderBloc(OrderService())),
+        // BlocProvider(create: (context) => RemoteOrderBloc(OrderService())),
       ],
       child: MaterialApp(
         theme: FlexThemeData.light(

@@ -26,6 +26,12 @@ class Order {
     );
   }
 
+  factory Order.fromJson(Map<String, dynamic> map) {
+    return Order(
+      quantity: map['quantity'] as int,
+      coffee: Coffee.fromJson(map['coffee'] as Map<String, dynamic>),
+    );
+  }
   toJson() {
     return {
       'quantity': quantity,
